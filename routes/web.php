@@ -70,3 +70,5 @@ Route::prefix('Training')->group(function () {
         return '<h1>Logistics page</h1>';
     });
 });
+// task 3
+Route::get('addCarForm',[CarController::class,'addCarForm']);
