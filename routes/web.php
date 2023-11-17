@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +73,5 @@ Route::prefix('Training')->group(function () {
 });
 // task 3
 Route::get('addCarForm',[CarController::class,'addCarForm']);
+Route::post('storeCarData',[CarController::class,'storeData']);
+Route::get('carDetails',[CarController::class,'showData']);
