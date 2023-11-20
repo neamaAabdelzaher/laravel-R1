@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\NewsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -75,3 +78,7 @@ Route::prefix('Training')->group(function () {
 Route::get('addCarForm',[CarController::class,'addCarForm']);
 Route::post('storeCarData',[CarController::class,'storeData']);
 Route::get('carDetails',[CarController::class,'showData']);
+// task4
+Route::get('add-news',[NewsController::class,'create']);
+Route::post('store-news',[NewsController::class,'store'])->name('news.store');
+Route::get('news',[NewsController::class,'index'])->name('news');
