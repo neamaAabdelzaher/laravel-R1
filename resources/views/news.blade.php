@@ -13,10 +13,12 @@
 <table class="table">
   <thead>
     <tr >
-      <th class="bg-primary" scope="col">Title</th>
-      <th  class ="bg-secondary" scope="col">Content</th>
-      <th  class="bg-primary" scope="col">Author</th>
-      <th class ="bg-secondary" scope="col">Is Published ?</th>
+      <th  scope="col">Title</th>
+      <th   scope="col">Content</th>
+      <th  scope="col">Author</th>
+      <th  scope="col">Is Published ?</th>
+      <th  scope="col">Edit</th>
+     
     </tr>
   </thead>
   <tbody>
@@ -26,7 +28,9 @@
       <td>{{ $news->title }}</td>
       <td>{{ $news->content }}</td>
       <td>{{ $news->author }}</td>
-      <td>{{ $news->published  }}</td>
+      <td>{{ $news->published ?"Yes ✅":"No ❌"}}</td>
+      <td><a class="btn btn-success" href="edit-news/{{$news->id}}">Edit </a></td>
+    
    
     </tr>
     @endforeach

@@ -12,7 +12,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news= News::all();
+        // $news= News::all();
+        $news= News::get();
         
         return view("news",["news"=>$news]);
     }
@@ -53,15 +54,27 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       $news=News::findOrFail($id);
+       return view('update-news',['news'=>$news]);
     }
 
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, string $id)
     {
-        //
+        $news=News::findOrFail($id);
+    
+       
+        $news->update([
+            'title'=>$request->title,
+            'content'=>$request->content,
+            'author'=>$request->author,
+            'published'=> $request->has('published')
+        ]);
+        
+        return redirect('news');
     }
 
     /**

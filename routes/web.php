@@ -82,3 +82,7 @@ Route::get('carDetails',[CarController::class,'showData']);
 Route::get('add-news',[NewsController::class,'create']);
 Route::post('store-news',[NewsController::class,'store'])->name('news.store');
 Route::get('news',[NewsController::class,'index'])->name('news');
+// task 5
+Route::get('edit-news/{news_id}',[NewsController::class,'edit']);
+Route::put('update-news/{news_id}',[NewsController::class,'update'])->name('update-news');
+
