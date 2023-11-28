@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CarController;
+use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\CarsController;
 
 
 
@@ -74,15 +75,27 @@ Route::prefix('Training')->group(function () {
         return '<h1>Logistics page</h1>';
     });
 });
-// task 3
-Route::get('addCarForm',[CarController::class,'addCarForm']);
-Route::post('storeCarData',[CarController::class,'storeData']);
-Route::get('carDetails',[CarController::class,'showData']);
-// task4
+// task 3 
+Route::get('addCarForm',[ExampleController::class,'addCarForm']);
+Route::post('storeCarData',[ExampleController::class,'storeData']);
+Route::get('carDetails',[ExampleController::class,'showData']);
+// task4 newsController route
 Route::get('add-news',[NewsController::class,'create']);
 Route::post('store-news',[NewsController::class,'store'])->name('news.store');
 Route::get('news',[NewsController::class,'index'])->name('news');
-// task 5
+// task 5 newsController route
 Route::get('edit-news/{news_id}',[NewsController::class,'edit']);
 Route::put('update-news/{news_id}',[NewsController::class,'update'])->name('update-news');
+//task 6 carController route
+Route::get('add-car',[CarsController::class,'create']);
+Route::post('store-car',[CarsController::class,'store'])->name('store-car');
+Route::get('cars',[CarsController::class,'index']);
+Route::get('single-car/{car_id}',[CarsController::class,'show']);
+Route::get('edit-car/{car_id}',[CarsController::class,'edit']);
+Route::put('update-car/{car_id}',[CarsController::class,'update'])->name('update-car');
+Route::get('delete-car/{car_id}',[CarsController::class,'destroy']);
 
+// task 6 newsController route
+
+Route::get('delete-news/{news_id}',[NewsController::class,'destroy']);
+Route::get('show-news/{news_id}',[NewsController::class,'show']);

@@ -46,7 +46,8 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+       $news=News::findOrFail($id);
+       return view('single-news',['news'=>$news]);
     }
 
     /**
@@ -82,6 +83,9 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // News::findOrFail($id)->delete();
+        News::where('id',$id)->delete();
+        return redirect('news');
+
     }
 }

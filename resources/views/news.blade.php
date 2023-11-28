@@ -17,7 +17,9 @@
       <th   scope="col">Content</th>
       <th  scope="col">Author</th>
       <th  scope="col">Is Published ?</th>
+      <th  scope="col">Show</th>
       <th  scope="col">Edit</th>
+      <th  scope="col">Delete</th>
      
     </tr>
   </thead>
@@ -29,7 +31,9 @@
       <td>{{ $news->content }}</td>
       <td>{{ $news->author }}</td>
       <td>{{ $news->published ?"Yes ✅":"No ❌"}}</td>
+      <td><a class="btn btn-primary" href="show-news/{{$news->id}}">Show </a></td>
       <td><a class="btn btn-success" href="edit-news/{{$news->id}}">Edit </a></td>
+      <td><a class="btn btn-danger" href="delete-news/{{$news->id}}">Delete </a></td>
     
    
     </tr>
