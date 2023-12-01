@@ -93,9 +93,20 @@ Route::get('cars',[CarsController::class,'index']);
 Route::get('single-car/{car_id}',[CarsController::class,'show']);
 Route::get('edit-car/{car_id}',[CarsController::class,'edit']);
 Route::put('update-car/{car_id}',[CarsController::class,'update'])->name('update-car');
-Route::get('delete-car/{car_id}',[CarsController::class,'destroy']);
+// Route::get('delete-car/{car_id}',[CarsController::class,'destroy']);
 
 // task 6 newsController route
 
 Route::get('delete-news/{news_id}',[NewsController::class,'destroy']);
 Route::get('show-news/{news_id}',[NewsController::class,'show']);
+
+// session 7
+// delete another way
+Route::delete("delete", [CarsController::class,"destroy"])->name('delete-car');
+Route::get('trashed',[CarsController::class,'trashed']);
+Route::get('restore-car/{car_id}',[CarsController::class,'restore']);
+Route::get('forced-deleted/{car_id}',[CarsController::class,'forcedDeleted']);
+//task 7
+Route::get('trashed-news',[NewsController::class,'trashedNews']);
+Route::get('restore-news/{news_id}',[NewsController::class,'restoreNews']);
+Route::get('forced-d-news/{news_id}',[NewsController::class,'forcedDNews']);

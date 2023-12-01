@@ -20,8 +20,7 @@
         <th >Description</th>
         <th>Price</th>
         <th >Published</th>
-         <th >Show</th>
-         <th >Edit</th> 
+         <th >Restore</th>
         <th >Delete</th> 
       </tr>
     </thead>
@@ -38,18 +37,8 @@
         <td > No ❌ </td>
 
         @endif
-        <td><a href="single-car/{{$car->id}}">Show</a></td>
-        <td><a href="edit-car/{{$car->id}}">Edit</a></td>
-        <!-- <td><a href="delete-car/{{$car->id}}">Delete</a></td> -->
-        <!-- anthor way to delete  -->
-        <td>
-<form action="{{ route('delete-car') }}" method="post">
-@csrf
-@method('DELETE')
-<input type="hidden" name="id" value="{{ $car->id }}">
-<input type="submit" value="delete">
-</form>
-</td>
+        <td><a href="restore-car/{{$car->id}}">Restore</a></td>
+       <td><a href="forced-deleted/{{$car->id}}">Delete</a></td>
 
       </tr>
       @endforeach
