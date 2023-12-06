@@ -110,3 +110,7 @@ Route::get('forced-deleted/{car_id}',[CarsController::class,'forcedDeleted']);
 Route::get('trashed-news',[NewsController::class,'trashedNews']);
 Route::get('restore-news/{news_id}',[NewsController::class,'restoreNews']);
 Route::get('forced-d-news/{news_id}',[NewsController::class,'forcedDNews']);
+// session 8
+
+Route::get('show-upload',[ExampleController::class,'showUpload']);
+Route::post('upload',[ExampleController::class,'upload'])->name('upload-image');

@@ -10,7 +10,7 @@
 <div class="container m-5">
     
 <div class="card" style="width: 18rem;">
-  <!-- <img src="..." class="card-img-top" alt="..."> -->
+ <img src="/assets/images/{{$car['image']}}" class="card-img-top" alt="..."> 
   <div class="card-body">
     Title:<h5 class="card-title text-primary"> {{ $car->carTitle}}</h5>
    Description: <p class="card-text">{{ $car->description}}</p>

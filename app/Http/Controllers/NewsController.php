@@ -37,7 +37,7 @@ class NewsController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        // validate
+        // validate task 7
         $data = $request->only($this->columns);
         $data['published'] = isset($data['published']) ? true : false;
         $request->validate([
@@ -46,7 +46,7 @@ class NewsController extends Controller
             'author' => 'required|string'
 
         ]);
-        
+
 
 
         News::create($data);

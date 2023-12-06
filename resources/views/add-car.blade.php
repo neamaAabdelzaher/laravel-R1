@@ -12,11 +12,11 @@
 
 <div class="container">
   <h2>Add Car</h2>
-  <form action="{{route('store-car')}}" method="post">
+  <form action="{{route('store-car')}}" method="post" enctype="multipart/form-data">
   @csrf
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="carTitle">
+      <input type="text" class="form-control" id="title" placeholder="Enter title" name="carTitle" value="{{old('carTitle')}}">
       @error('carTitle')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
@@ -24,14 +24,30 @@
     </div>
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price">
+      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{old('price')}}">
+      @error('price')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" name="description" rows="5" id="description"></textarea>
+        <textarea class="form-control" name="description" rows="5" id="description">{{old('description')}}</textarea>
+        @error('description')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
       </div> 
+      <div class="form-group">
+      <label for="description">Upload Image:</label>
+        <input type="file" class="form-control" id="image"  name="image">
+        @error('image')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+
+      </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="published"> Published</label>
+      <label><input type="checkbox" name="published" > Published</label>
     </div>
     <button type="submit" class="btn btn-default">Add</button>
   </form>

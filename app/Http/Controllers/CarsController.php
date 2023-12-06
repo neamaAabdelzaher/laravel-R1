@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use Illuminate\Http\RedirectResponse;
+use App\Traits\Common;
 
 class CarsController extends Controller
 {
+    use Common;
     private $columns=['carTitle','price','description','published'];
     /**
      * Display a listing of the resource.
@@ -33,17 +35,33 @@ class CarsController extends Controller
     {
 
         // validate
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true : false;
-        $request->validate([
-       "carTitle"=> 'required|string',
+        $messages=[
+            'carTitle.required'=>'title is required',
+            'carTitle.max'=>'title should be less than 50 letter',
+            'price.required'=>'price is required',
+            'description.required'=>'description is required',
+            'description.lowercase'=>'description should be lowercase',
+            'description.min'=>'description should not be  less than 20 letter',
+            'image.required'=>'choose image',
+            'image.mimes'=>'image extension must be png,jpg or jpeg ',
+            'image.max'=>'image max size 2GB',
+
+
+        ];
+      
+      $data= $request->validate([
+       "carTitle"=> 'required|max:50',
        'price'=> 'required',
-       'description'=> 'required|string|max:100|lowercase'
+       'description'=> 'required|min:20|lowercase',
+       'image' => 'required|mimes:png,jpg,jpeg|max:2048',
 
-        ]);
+        ],$messages);
+        $fileName=$this->uploadFile($request->image , 'assets/images');
+        $data['image']=$fileName;
+        $data['published'] = isset($request['published']);
+        Car::create($data); 
+        return redirect('cars');
 
-       
-        Car::create($data);  
     //    $cars= new Car();
     //    $cars->carTitle=$request->carTitle;
     //    $cars->price=$request->price;
@@ -51,7 +69,6 @@ class CarsController extends Controller
     //   $request->published?$cars->published=1:$cars->published=0;
     //   $cars->save();
     //    return "data added successfully";
-        return redirect('cars');
 
     }
 
@@ -76,14 +93,55 @@ class CarsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):RedirectResponse
-    {
-        $data = $request->only($this->columns);   
-        $data['published'] = $request->has('published'); 
-        Car::where('id', $id)->update($data);   
-        // return "data updated successfully";
+    public function update(Request $request, string $id)
+    {// update  with validation 
+        // task 8
+     $updateMessages=[
+            'carTitle.required'=>'title is required',
+            'carTitle.max'=>'title should be less than 50 letter',
+            'price.required'=>'price is required',
+            'description.required'=>'description is required',
+            'description.lowercase'=>'description should be lowercase',
+            'description.min'=>'description should not be less than 20 letter',
+            // 'image.required'=>'choose image',
+            'image.mimes'=>'image extension must be png,jpg or jpeg ',
+            'image.max'=>'image max size 2GB',
+        ];
+      $data= $request->validate([
+       "carTitle"=> 'required|max:50',
+       'price'=> 'required',
+       'description'=> 'required|min:20|lowercase',
+       'image' => 'mimes:png,jpg,jpeg|max:2048',
+        ],$updateMessages);
 
-        return redirect ('cars');
+        $image = $request->file('image');
+        // if image is selected ,it will be moved to destination path and stored at DB
+        if($image)
+        
+        {
+        $destinationPath='assets/images';
+        $fileName=$this->uploadFile($image ,$destinationPath);
+        $data['image']="$fileName";
+
+        }
+        // if not selected --> store the old image 
+        else{
+        $car= Car::findOrFail($id);
+        $data['image']=$car->image;
+           
+        }
+      
+        $data['published'] = isset($request['published']);
+        Car::where('id', $id)->update($data);   
+        return redirect('cars');
+
+        ///// update first method /////
+        // $data = $request->only($this->columns);   
+        // $data['published'] = $request->has('published'); 
+        // Car::where('id', $id)->update($data);   
+        // // return "data updated successfully";
+
+        // return redirect ('cars');
     } 
 
     /**
