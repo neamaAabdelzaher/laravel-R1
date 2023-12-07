@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\placesController;
 
 
 
@@ -114,3 +115,12 @@ Route::get('forced-d-news/{news_id}',[NewsController::class,'forcedDNews']);
 
 Route::get('show-upload',[ExampleController::class,'showUpload']);
 Route::post('upload',[ExampleController::class,'upload'])->name('upload-image');
+
+// session 9
+// Route::get('place',[ExampleController::class,'showPlace']);
+Route::get('blog',[ExampleController::class,'showBlog']);
+
+// task 9
+Route::get('add-place',[placesController::class,'create']);
+Route::post('store-place',[placesController::class,'store'])->name('store-place');
+Route::get('place',[placesController::class,'index']);

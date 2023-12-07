@@ -52,4 +52,18 @@ class ExampleController extends Controller
       // return dd($request->image);
 
      }
+
+
+    //  session 9
+
+    // public function showPlace(){
+
+
+    //   return view ('place');
+    // }
+    public function showBlog(){
+
+
+      return view ('blog');
+    }
 }

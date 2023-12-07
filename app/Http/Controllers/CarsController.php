@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Car;
 use Illuminate\Http\RedirectResponse;
 use App\Traits\Common;
+use Illuminate\Support\Facades\DB;
 
 class CarsController extends Controller
 {
@@ -16,8 +17,12 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::get();
-        return view("cars", compact("cars"));
+        // eloquent model 
+        // $cars = Car::get();
+        // query builder
+        $cars=DB::table('cars')->paginate(2);
+        // dd($cars);
+        return view("cars", ["cars"=>$cars]);
     }
 
     /**
@@ -111,7 +116,7 @@ class CarsController extends Controller
        "carTitle"=> 'required|max:50',
        'price'=> 'required',
        'description'=> 'required|min:20|lowercase',
-       'image' => 'mimes:png,jpg,jpeg|max:2048',
+       'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
         ],$updateMessages);
 
         $image = $request->file('image');
@@ -140,8 +145,9 @@ class CarsController extends Controller
         // $data['published'] = $request->has('published'); 
         // Car::where('id', $id)->update($data);   
         // // return "data updated successfully";
-
         // return redirect ('cars');
+
+      
     } 
 
     /**

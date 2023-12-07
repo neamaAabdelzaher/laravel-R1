@@ -28,34 +28,37 @@
     </thead>
     <tbody>
         
-        @foreach ($cars as $car)
+        
+        @for($i=0; $i < count($cars); $i++)
+        
       <tr>
-        <td>{{$car->carTitle}}</td>
-        <td>{{$car->description}}</td>
-        <td>{{$car->price}}</td>
-        <td><img src="/assets/images/{{$car['image']}}" alt="carImage"  height="50"width ="50"> </td>
-        @if( $car->published === 1)
+        <td>{{$cars[$i]->carTitle}}</td>
+        <td>{{$cars[$i]->description}}</td>
+        <td>{{$cars[$i]->price}}</td>
+        <td><img src="{{asset('assets/images/'.$cars[$i]->image)}}" alt="carImage"  height="50"width ="50"> </td>
+       
+        @if( $cars[$i]->published === 1)
         <td > Yes ✅</td>
         @else
         <td > No ❌ </td>
 
         @endif
-        <td><a href="single-car/{{$car->id}}">Show</a></td>
-        <td><a href="edit-car/{{$car->id}}">Edit</a></td>
-        <!-- <td><a href="delete-car/{{$car->id}}">Delete</a></td> -->
+        <td><a href="single-car/{{$cars[$i]->id}}">Show</a></td>
+        <td><a href="edit-car/{{$cars[$i]->id}}">Edit</a></td>
+        <!-- <td><a href="delete-car/{{$cars[$i]->id}}">Delete</a></td> -->
         <!-- anthor way to delete  -->
         <td>
 <form action="{{ route('delete-car') }}" method="post">
 @csrf
 @method('DELETE')
-<input type="hidden" name="id" value="{{ $car->id }}">
+<input type="hidden" name="id" value="{{ $cars[$i]->id }}">
 <input type="submit" value="delete">
 </form>
 </td>
 
       </tr>
-      @endforeach
-      
+     
+      @endfor
       
     </tbody>
   </table>
