@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title',100);
             $table->text('description');
-            $table->float('priceFrom');
-            $table->float('priceTo');
+            $table->double('priceFrom');
+            $table->double('priceTo');
             $table->string('image',100);
             $table->softDeletes();
             $table->timestamps();

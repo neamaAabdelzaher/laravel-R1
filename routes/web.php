@@ -124,3 +124,6 @@ Route::get('blog',[ExampleController::class,'showBlog']);
 Route::get('add-place',[placesController::class,'create']);
 Route::post('store-place',[placesController::class,'store'])->name('store-place');
 Route::get('place',[placesController::class,'index']);
+// task 10
+Route::get('places-dashboard',[placesController::class,'placesDashboard']);
+Route::get("delete-place/{place_id}", [placesController::class,"destroy"]);

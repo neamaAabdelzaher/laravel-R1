@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use App\Traits\Common;
+use App\Models\Place;
 
 class placesController extends Controller
 {
@@ -17,7 +18,7 @@ class placesController extends Controller
     {
         //get place data using query builder
         // $places = DB::table("places")->get();
-        $places = DB::table("places")->paginate(6);
+        $places = DB::table("places")->paginate(2);
         // dd($places);
 
         return view("place", ["places"=> $places]);
@@ -88,7 +89,10 @@ class placesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
+        Place::findOrFail($id)->delete();
+
+        return redirect('places-dashboard');
     }
 
     public function validationMessages(){
@@ -105,5 +109,10 @@ class placesController extends Controller
              'image.max'=>'image max size 2GB',
 
         ];
+    }
+
+    public function placesDashboard(){
+           $places = DB::table("places")->get();
+           return view("places-dashboard", compact("places"));
     }
 }

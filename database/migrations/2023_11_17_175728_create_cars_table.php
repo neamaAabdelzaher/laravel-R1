@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('carTitle',100);
-            $table->float('price');
+            $table->double('price');
             $table->text('description');
             $table->boolean('published');
             $table->string('image',100);
