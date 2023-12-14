@@ -116,7 +116,7 @@ class CarsController extends Controller
             'carTitle.max'=>'title should be less than 50 letter',
             'price.required'=>'price is required',
             'description.required'=>'description is required',
-            'description.lowercase'=>'description should be lowercase',
+            // 'description.lowercase'=>'description should be lowercase',
             'description.min'=>'description should not be less than 20 letter',
             // 'image.required'=>'choose image',
             'image.mimes'=>'image extension must be png,jpg or jpeg ',
@@ -125,7 +125,7 @@ class CarsController extends Controller
       $data= $request->validate([
        "carTitle"=> 'required|max:50',
        'price'=> 'required',
-       'description'=> 'required|min:20|lowercase',
+       'description'=> 'required|min:20',
        'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
         ],$updateMessages);
 
@@ -147,6 +147,7 @@ class CarsController extends Controller
         }
       
         $data['published'] = isset($request['published']);
+        $data['category_id'] = $request['category_id'];
         Car::where('id', $id)->update($data);   
         return redirect('cars');
 
