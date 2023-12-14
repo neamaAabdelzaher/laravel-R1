@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use App\Traits\Common;
 use Illuminate\Support\Facades\DB;
@@ -18,9 +19,9 @@ class CarsController extends Controller
     public function index()
     {
         // eloquent model 
-        // $cars = Car::get();
+        $cars = Car::get();
         // query builder
-        $cars=DB::table('cars')->paginate(2);
+        // $cars=DB::table('cars')->->get();
         // dd($cars);
         return view("cars", ["cars"=>$cars]);
     }
@@ -30,7 +31,8 @@ class CarsController extends Controller
      */
     public function create()
     {
-       return view("add-car");
+        $categories=Category::select("id","categoryName")->get();
+        return view("add-car",compact("categories"));
     }
 
     /**
@@ -50,6 +52,8 @@ class CarsController extends Controller
             'image.required'=>'choose image',
             'image.mimes'=>'image extension must be png,jpg or jpeg ',
             'image.max'=>'image max size 2GB',
+          
+
 
 
         ];
@@ -59,11 +63,14 @@ class CarsController extends Controller
        'price'=> 'required',
        'description'=> 'required|min:20|lowercase',
        'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+       
 
         ],$messages);
         $fileName=$this->uploadFile($request->image , 'assets/images');
         $data['image']=$fileName;
         $data['published'] = isset($request['published']);
+        $data['category_id'] = $request['category_id'];
+        // dd($data);
         Car::create($data); 
         return redirect('cars');
 
@@ -92,7 +99,10 @@ class CarsController extends Controller
     public function edit(string $id)
     {
         $car= Car::findOrFail($id);
-        return view("update-car", compact("car"));
+       $catID=$car['category_id'];
+    //    dd($catID);
+        $categories=Category::select("id","categoryName")->whereNotIn('id',[$catID])->get();
+        return view("update-car", compact("car","categories"));
     }
 
     /**

@@ -16,6 +16,7 @@
    Description: <p class="card-text">{{ $car->description}}</p>
   Price: <p>{{ $car->price }}</p>
    Is_Published: <p>{{$car->published ?"published":"not published"}}</p> 
+   <p class="card-text">{{$car->category->categoryName}}</p>
   </div>
 </div>
 </div>

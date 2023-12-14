@@ -46,6 +46,18 @@
 @enderror
 
       </div>
+   <div class="form-group">
+
+   <label for="cat_id">Category Name</label>
+    <select name="category_id" id="cat_id" class="form-select" aria-label="Default select example">
+  <option disabled selected>Open this select menu</option>
+   @foreach($categories as $cat )
+  <option value="{{$cat->id}}">{{$cat->categoryName}}</option>
+
+
+  @endforeach
+</select>
+   </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published" > Published</label>
     </div>
