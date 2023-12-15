@@ -61,7 +61,7 @@
         <option >{{$car->category->categoryName}} </option>
 
           @foreach($categories as $cat )
-          <option value="{{$cat->id}}" > {{$cat->categoryName}}
+          <option value="{{$car->category->id}}" > {{$cat->categoryName}}
             
           </option>
 

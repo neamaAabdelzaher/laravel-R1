@@ -50,7 +50,7 @@
 
    <label for="cat_id">Category Name</label>
     <select name="category_id" id="cat_id" class="form-select" aria-label="Default select example">
-  <option disabled selected>Open this select menu</option>
+    <option disabled selected >Select Category</option>
    @foreach($categories as $cat )
   <option value="{{$cat->id}}">{{$cat->categoryName}}</option>
 

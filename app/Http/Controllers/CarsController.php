@@ -52,6 +52,9 @@ class CarsController extends Controller
             'image.required'=>'choose image',
             'image.mimes'=>'image extension must be png,jpg or jpeg ',
             'image.max'=>'image max size 2GB',
+            // task 11
+            'category_id.required'=>' select category ',
+
           
 
 
@@ -63,13 +66,14 @@ class CarsController extends Controller
        'price'=> 'required',
        'description'=> 'required|min:20|lowercase',
        'image' => 'required|mimes:png,jpg,jpeg|max:2048',
-       
+    //    task 11
+       'category_id'=>'required'
 
         ],$messages);
         $fileName=$this->uploadFile($request->image , 'assets/images');
         $data['image']=$fileName;
         $data['published'] = isset($request['published']);
-        $data['category_id'] = $request['category_id'];
+        // $data['category_id'] = $request['category_id'];
         // dd($data);
         Car::create($data); 
         return redirect('cars');
@@ -99,8 +103,10 @@ class CarsController extends Controller
     public function edit(string $id)
     {
         $car= Car::findOrFail($id);
+        // task 11
        $catID=$car['category_id'];
     //    dd($catID);
+    // get all categories except category which its id == $car['category_id'] (task 11)
         $categories=Category::select("id","categoryName")->whereNotIn('id',[$catID])->get();
         return view("update-car", compact("car","categories"));
     }
@@ -121,13 +127,19 @@ class CarsController extends Controller
             // 'image.required'=>'choose image',
             'image.mimes'=>'image extension must be png,jpg or jpeg ',
             'image.max'=>'image max size 2GB',
+            // task 11
+            'category_id.required'=>' select category ',
+          
+
         ];
       $data= $request->validate([
        "carTitle"=> 'required|max:50',
        'price'=> 'required',
        'description'=> 'required|min:20',
        'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
-        ],$updateMessages);
+    //    task 11
+       'category_id'=>'required',
+    ],$updateMessages);
 
         $image = $request->file('image');
         // if image is selected ,it will be moved to destination path and stored at DB
@@ -147,7 +159,7 @@ class CarsController extends Controller
         }
       
         $data['published'] = isset($request['published']);
-        $data['category_id'] = $request['category_id'];
+        // $data['category_id'] = $request['category_id'];
         Car::where('id', $id)->update($data);   
         return redirect('cars');
 
