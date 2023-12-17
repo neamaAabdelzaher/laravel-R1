@@ -58,10 +58,11 @@
         <label for="cat_id">Category Name</label>
        
         <select name="category_id" id="cat_id" class="form-select" aria-label="Default select example">
-        <option >{{$car->category->categoryName}} </option>
+       
+        <option value="{{$car->category->id}}" >{{$car->category->categoryName}} </option>
 
           @foreach($categories as $cat )
-          <option value="{{$car->category->id}}" > {{$cat->categoryName}}
+          <option value="{{$cat->id}}" > {{$cat->categoryName}}
             
           </option>
 

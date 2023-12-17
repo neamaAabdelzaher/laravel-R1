@@ -20,6 +20,7 @@
         <th >Description</th>
         <th>Price</th>
         <th>Image</th>
+        <th>Category Name</th>
         <th >Published</th>
          <th >Show</th>
          <th >Edit</th> 
@@ -36,6 +37,7 @@
         <td>{{$cars[$i]->description}}</td>
         <td>{{$cars[$i]->price}}</td>
         <td><img src="{{asset('assets/images/'.$cars[$i]->image)}}" alt="carImage"  height="50"width ="50"> </td>
+        <td>{{$cars[$i]->category->categoryName}}</td>
        
         @if( $cars[$i]->published === 1)
         <td > Yes ✅</td>
