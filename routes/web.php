@@ -127,3 +127,7 @@ Route::get('place',[placesController::class,'index']);
 // task 10
 Route::get('places-dashboard',[placesController::class,'placesDashboard']);
 Route::get("delete-place/{place_id}", [placesController::class,"destroy"]);
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
