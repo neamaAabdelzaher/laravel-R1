@@ -5,6 +5,7 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CarsController;
 use App\Http\Controllers\placesController;
+use App\Http\Controllers\ContactUsController;
 
 
 
@@ -131,3 +132,7 @@ Route::get("delete-place/{place_id}", [placesController::class,"destroy"]);
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// task 12
+Route::get('contact-us',[ContactUsController::class,'create']);
+Route::post('send-mail',[ContactUsController::class,'store'])->name('send-mail');

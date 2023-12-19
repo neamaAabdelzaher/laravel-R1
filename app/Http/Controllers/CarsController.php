@@ -10,7 +10,7 @@ use App\Traits\Common;
 use Illuminate\Support\Facades\DB;
 
 class CarsController extends Controller
-{
+{ 
     use Common;
     private $columns=['carTitle','price','description','published'];
     /**
