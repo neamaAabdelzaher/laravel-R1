@@ -43,17 +43,17 @@ class CarsController extends Controller
 
         // validate
         $messages=[
-            'carTitle.required'=>'title is required',
-            'carTitle.max'=>'title should be less than 50 letter',
-            'price.required'=>'price is required',
-            'description.required'=>'description is required',
-            'description.lowercase'=>'description should be lowercase',
-            'description.min'=>'description should not be  less than 20 letter',
-            'image.required'=>'choose image',
-            'image.mimes'=>'image extension must be png,jpg or jpeg ',
-            'image.max'=>'image max size 2GB',
+            'carTitle.required'=>__('messages.titleErrorMsg'),
+            'carTitle.max'=>__('messages.car-title-max'),
+            'price.required'=>__('messages.priceErrorMsg'),
+            'description.required'=>__('messages.descErrorMsg'),
+            'description.lowercase'=>__('messages.desc-lowercase'),
+            'description.min'=>__('messages.desc-min'),
+            'image.required'=>__('messages.imageRequire'),
+            'image.mimes'=>__('messages.imageExtension'),
+            'image.max'=>__('messages.imageMax'),
             // task 11
-            'category_id.required'=>' select category ',
+            'category_id.required'=>__('messages.catErrorMsg'),
 
           
 

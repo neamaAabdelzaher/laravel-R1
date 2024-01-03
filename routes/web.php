@@ -89,7 +89,7 @@ Route::get('news',[NewsController::class,'index'])->name('news');
 Route::get('edit-news/{news_id}',[NewsController::class,'edit']);
 Route::put('update-news/{news_id}',[NewsController::class,'update'])->name('update-news');
 //task 6 carController route
-Route::get('add-car',[CarsController::class,'create']);
+
 Route::post('store-car',[CarsController::class,'store'])->name('store-car');
 Route::get('cars',[CarsController::class,'index'])->middleware('adminMiddleware');
 Route::get('single-car/{car_id}',[CarsController::class,'show']);
@@ -144,8 +144,9 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){ 
+    ], function(){
 
- Route::get('contact-us',[ContactUsController::class,'create']);
-Route::post('send-mail',[ContactUsController::class,'store'])->name('send-mail');
+        Route::get('contact-us', [ContactUsController::class, 'create']);
+        Route::post('send-mail', [ContactUsController::class, 'store'])->name('send-mail');
+        Route::get('add-car', [CarsController::class, 'create']);
     });

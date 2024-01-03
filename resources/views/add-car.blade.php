@@ -11,27 +11,31 @@
 <body>
 
 <div class="container">
-  <h2>Add Car</h2>
+  <div>
+    <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+    <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+  </div>
+  <h2>{{__('messages.add-car-title')}}</h2>
   <form action="{{route('store-car')}}" method="post" enctype="multipart/form-data">
   @csrf
     <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="carTitle" value="{{old('carTitle')}}">
+      <label for="title">{{__('messages.title')}}</label>
+      <input type="text" class="form-control" id="title" placeholder="{{__('messages.title-placeholder')}}" name="carTitle" value="{{old('carTitle')}}">
       @error('carTitle')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
     </div>
     <div class="form-group">
-      <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{old('price')}}">
+      <label for="price">{{__('messages.price')}}</label>
+      <input type="number" class="form-control" id="price" placeholder="{{__('messages.price-placeholder')}}" name="price" value="{{old('price')}}">
       @error('price')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
     </div>
     <div class="form-group">
-        <label for="description">Description:</label>
+        <label for="description">{{__('messages.description')}}</label>
         <textarea class="form-control" name="description" rows="5" id="description">{{old('description')}}</textarea>
         @error('description')
     <div class="alert alert-danger">{{ $message }}</div>
@@ -39,7 +43,7 @@
 
       </div> 
       <div class="form-group">
-      <label for="description">Upload Image:</label>
+      <label for="description">{{__('messages.image')}}</label>
         <input type="file" class="form-control" id="image"  name="image">
         @error('image')
     <div class="alert alert-danger">{{ $message }}</div>
@@ -48,9 +52,9 @@
       </div>
    <div class="form-group">
 
-   <label for="cat_id">Category Name</label>
+   <label for="cat_id">{{__('messages.category')}}</label>
     <select name="category_id" id="cat_id" class="form-select" aria-label="Default select example">
-    <option disabled selected >Select Category</option>
+    <option disabled selected >{{__('messages.selectCategory')}}</option>
    @foreach($categories as $cat )
   <option value="{{$cat->id}}">{{$cat->categoryName}}</option>
 
@@ -59,9 +63,9 @@
 </select>
    </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="published" > Published</label>
+      <label><input type="checkbox" name="published" >{{__('messages.published')}} </label>
     </div>
-    <button type="submit" class="btn btn-default">Add</button>
+    <button type="submit" class="btn btn-default">{{__('messages.add-car')}}</button>
   </form>
 </div>
 
