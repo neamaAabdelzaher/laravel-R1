@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExampleController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CarsController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\placesController;
+use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ContactUsController;
 
 
@@ -91,7 +91,7 @@ Route::put('update-news/{news_id}',[NewsController::class,'update'])->name('upda
 //task 6 carController route
 Route::get('add-car',[CarsController::class,'create']);
 Route::post('store-car',[CarsController::class,'store'])->name('store-car');
-Route::get('cars',[CarsController::class,'index']);
+Route::get('cars',[CarsController::class,'index'])->middleware('adminMiddleware');
 Route::get('single-car/{car_id}',[CarsController::class,'show']);
 Route::get('edit-car/{car_id}',[CarsController::class,'edit']);
 Route::put('update-car/{car_id}',[CarsController::class,'update'])->name('update-car');
@@ -134,5 +134,18 @@ Auth::routes(['verify'=>true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // task 12
-Route::get('contact-us',[ContactUsController::class,'create']);
+
+
+// session 13 
+Route::get ('session',[ExampleController::class,'mySession']);
+// session 14
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+
+ Route::get('contact-us',[ContactUsController::class,'create']);
 Route::post('send-mail',[ContactUsController::class,'store'])->name('send-mail');
+    });

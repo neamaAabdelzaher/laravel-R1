@@ -10,7 +10,11 @@
 <body>
 <!-- task 12  -->
 <div class="w-50">
-    <h1 class="text-primary m-2">Contact Us</h1>
+      <div>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+      </div>
+    <h1 class="text-primary m-2">{{__('messages.contactForm')}}</h1>
     @if (session('alert'))
     <div class="alert alert-success">{{session('alert')}}</div>
 

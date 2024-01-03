@@ -66,4 +66,16 @@ class ExampleController extends Controller
 
       return view ('blog');
     }
+
+
+    public function mySession(){
+
+      session()->put('test','first laravel session');
+        // to end session
+
+       session()->forget('test'); 
+      $data=session('test');
+
+      return view('session',compact('data'));
+    }
 }
