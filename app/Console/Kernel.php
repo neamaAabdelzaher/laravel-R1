@@ -8,6 +8,10 @@ use App\Console\commands\Expiration;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands=[
+        "App\Console\Commands\DbBackup"
+    ];
     /**
      * Define the application's command schedule.
      */
@@ -15,6 +19,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('user:expiration')->everyMinute();
+        $schedule->command('db:backup')->daily();
     }
 
     /**
