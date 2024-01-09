@@ -91,7 +91,7 @@ Route::put('update-news/{news_id}',[NewsController::class,'update'])->name('upda
 //task 6 carController route
 
 Route::post('store-car',[CarsController::class,'store'])->name('store-car');
-Route::get('cars',[CarsController::class,'index'])->middleware('adminMiddleware');
+Route::get('cars',[CarsController::class,'index'])->middleware('verified');
 Route::get('single-car/{car_id}',[CarsController::class,'show']);
 Route::get('edit-car/{car_id}',[CarsController::class,'edit']);
 Route::put('update-car/{car_id}',[CarsController::class,'update'])->name('update-car');
